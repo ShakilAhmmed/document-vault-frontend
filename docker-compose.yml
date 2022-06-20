@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  app:
+    container_name: document-vault-front
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/var/www
+      - /var/www/node_modules
+    environment:
+      - NODE_ENV=development
+
+  nginx:
+    image: nginx:alpine
+    container_name: document-vault-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - document-vault-network
+
+networks:
+  document-vault-network:
+    driver: bridge
