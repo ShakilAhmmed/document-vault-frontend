@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import {Routes, Route, useLocation} from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import DocumentsList from "./pages/Domain/Documents/DocumentsList";
+import AddDocument from "./pages/Domain/Documents/AddDocument";
+import Category from "./pages/Domain/Category/Category";
 
 
 const Dashboard = () => {
@@ -24,7 +26,8 @@ const Dashboard = () => {
                                 <div className="container-fluid">
                                     <Routes>
                                         <Route path="/home" element={<Home/>}/>
-                                        <Route path="/add-documents" element={<Home/>}/>
+                                        <Route path="/categories" element={<Category/>}/>
+                                        <Route path="/add-documents" element={<AddDocument/>}/>
                                         <Route path="/documents" element={<DocumentsList/>}/>
                                         <Route path="/" element={<Login/>}/>
                                     </Routes>

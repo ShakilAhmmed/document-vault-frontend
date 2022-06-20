@@ -11,6 +11,10 @@ const Main = () => {
                     <ul className="nav flex-column">
 
                         <li className="nav-item">
+                            <Link className="nav-link" to="/categories">Categories</Link>
+                        </li>
+
+                        <li className="nav-item">
                             <Link className="nav-link" to="/add-documents">Add Documents</Link>
                         </li>
 
