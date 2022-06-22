@@ -1,134 +1,21 @@
+import {useNavigate} from "react-router-dom";
 
 const TopBar = () => {
+
+    let navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate('/', {replace: true})
+    }
+
+
     return (
         <>
             <div className="topbar">
                 {/* Navbar */}
                 <nav className="navbar-custom" id="navbar-custom">
                     <ul className="list-unstyled topbar-nav float-end mb-0">
-                        <li className="dropdown">
-                            <a className="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown"
-                               href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/flags/us_flag.jpg" alt="not found"
-                                     className="thumb-xxs rounded-circle"/>
-                            </a>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#"><img src="assets/images/flags/us_flag.jpg"
-                                                                           alt="not found"
-                                                                           height={15} className="me-2"/>English</a>
-                                <a className="dropdown-item" href="#"><img src="assets/images/flags/spain_flag.jpg"
-                                                                           alt="not found" height={15}
-                                                                           className="me-2"/>Spanish</a>
-                                <a className="dropdown-item" href="#"><img
-                                    src="assets/images/flags/germany_flag.jpg" alt height={15} className="me-2"/>German</a>
-                                <a className="dropdown-item" href="#"><img src="assets/images/flags/french_flag.jpg"
-                                                                           alt="not found" height={15}
-                                                                           className="me-2"/>French</a>
-                            </div>
-                        </li>
-                        {/*end topbar-language*/}
-                        <li className="dropdown notification-list">
-                            <a className="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown"
-                               href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i className="ti ti-mail"/>
-                            </a>
-                            <div className="dropdown-menu dropdown-menu-end dropdown-lg pt-0">
-                                <h6 className="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
-                                    Emails <span className="badge bg-soft-primary badge-pill">3</span>
-                                </h6>
-                                <div className="notification-menu" data-simplebar>
-                                    {/* item*/}
-                                    <a href="#" className="dropdown-item py-3">
-                                        <small className="float-end text-muted ps-2">2 min ago</small>
-                                        <div className="media">
-                                            <div className="avatar-md bg-soft-primary">
-                                                <img src="assets/images/users/user-1.jpg" alt="not found"
-                                                     className="thumb-sm rounded-circle"/>
-                                            </div>
-                                            <div className="media-body align-self-center ms-2 text-truncate">
-                                                <h6 className="my-0 fw-normal text-dark">Your order is placed</h6>
-                                                <small className="text-muted mb-0">Dummy text of the printing and
-                                                    industry.</small>
-                                            </div>
-                                            {/*end media-body*/}
-                                        </div>
-                                        {/*end media*/}
-                                    </a>{/*end-item*/}
-                                    {/* item*/}
-                                    <a href="#" className="dropdown-item py-3">
-                                        <small className="float-end text-muted ps-2">10 min ago</small>
-                                        <div className="media">
-                                            <div className="avatar-md bg-soft-primary">
-                                                <img src="assets/images/users/user-4.jpg" alt="not found"
-                                                     className="thumb-sm rounded-circle"/>
-                                            </div>
-                                            <div className="media-body align-self-center ms-2 text-truncate">
-                                                <h6 className="my-0 fw-normal text-dark">Meeting with designers</h6>
-                                                <small className="text-muted mb-0">It is a long established fact
-                                                    that a reader.</small>
-                                            </div>
-                                            {/*end media-body*/}
-                                        </div>
-                                        {/*end media*/}
-                                    </a>{/*end-item*/}
-                                    {/* item*/}
-                                    <a href="#" className="dropdown-item py-3">
-                                        <small className="float-end text-muted ps-2">40 min ago</small>
-                                        <div className="media">
-                                            <div className="avatar-md bg-soft-primary">
-                                                <img src="assets/images/users/user-2.jpg" alt="not found"
-                                                     className="thumb-sm rounded-circle"/>
-                                            </div>
-                                            <div className="media-body align-self-center ms-2 text-truncate">
-                                                <h6 className="my-0 fw-normal text-dark">UX 3 Task complete.</h6>
-                                                <small className="text-muted mb-0">Dummy text of the
-                                                    printing.</small>
-                                            </div>
-                                            {/*end media-body*/}
-                                        </div>
-                                        {/*end media*/}
-                                    </a>{/*end-item*/}
-                                    {/* item*/}
-                                    <a href="#" className="dropdown-item py-3">
-                                        <small className="float-end text-muted ps-2">1 hr ago</small>
-                                        <div className="media">
-                                            <div className="avatar-md bg-soft-primary">
-                                                <img src="assets/images/users/user-5.jpg" alt="not found"
-                                                     className="thumb-sm rounded-circle"/>
-                                            </div>
-                                            <div className="media-body align-self-center ms-2 text-truncate">
-                                                <h6 className="my-0 fw-normal text-dark">Your order is placed</h6>
-                                                <small className="text-muted mb-0">It is a long established fact
-                                                    that a reader.</small>
-                                            </div>
-                                            {/*end media-body*/}
-                                        </div>
-                                        {/*end media*/}
-                                    </a>{/*end-item*/}
-                                    {/* item*/}
-                                    <a href="#" className="dropdown-item py-3">
-                                        <small className="float-end text-muted ps-2">2 hrs ago</small>
-                                        <div className="media">
-                                            <div className="avatar-md bg-soft-primary">
-                                                <img src="assets/images/users/user-3.jpg" alt="not found"
-                                                     className="thumb-sm rounded-circle"/>
-                                            </div>
-                                            <div className="media-body align-self-center ms-2 text-truncate">
-                                                <h6 className="my-0 fw-normal text-dark">Payment Successfull</h6>
-                                                <small className="text-muted mb-0">Dummy text of the
-                                                    printing.</small>
-                                            </div>
-                                            {/*end media-body*/}
-                                        </div>
-                                        {/*end media*/}
-                                    </a>{/*end-item*/}
-                                </div>
-                                {/* All*/}
-                                <a className="dropdown-item text-center text-primary">
-                                    View all <i className="fi-arrow-right"/>
-                                </a>
-                            </div>
-                        </li>
+                        
                         <li className="dropdown notification-list">
                             <a className="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown"
                                href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -246,18 +133,11 @@ const TopBar = () => {
                                 <a className="dropdown-item" href="#"><i
                                     className="ti ti-settings font-16 me-1 align-text-bottom"/> Settings</a>
                                 <div className="dropdown-divider mb-0"/>
-                                <a className="dropdown-item" href="#"><i
+                                <a onClick={handleLogout} className="dropdown-item" href="#"><i
                                     className="ti ti-power font-16 me-1 align-text-bottom"/> Logout</a>
                             </div>
                         </li>
-                        {/*end topbar-profile*/}
-                        <li className="notification-list">
-                            <a className="nav-link arrow-none nav-icon offcanvas-btn" href="#"
-                               data-bs-toggle="offcanvas" data-bs-target="#Appearance" role="button"
-                               aria-controls="Rightbar">
-                                <i className="ti ti-settings ti-spin"/>
-                            </a>
-                        </li>
+                        
                     </ul>
                     {/*end topbar-nav*/}
                     <ul className="list-unstyled topbar-nav mb-0">

@@ -1,18 +1,13 @@
 import {useNavigate} from "react-router-dom";
 
-
-const Login = () => {
+const Register = () => {
 
     let navigate = useNavigate();
 
-
-    const handleLogIn = () => {
-        navigate('/home', {replace: true})
+    const handRegistration = () => {
+        navigate('/', {replace: true})
     }
 
-    const handleRegister = () => {
-        navigate('/register', {replace: true})
-    }
 
     return (
         <>
@@ -31,7 +26,7 @@ const Login = () => {
                                                 </a>
                                                 <h4 className="mt-3 mb-1 fw-semibold text-white font-18">Let's Get
                                                     Started Document Vault</h4>
-                                                <p className="text-muted  mb-0">Sign in to continue to Document
+                                                <p className="text-muted  mb-0">Sign Up to continue to Document
                                                     Vault.</p>
                                             </div>
                                         </div>
@@ -43,6 +38,19 @@ const Login = () => {
                                                     <input type="text" className="form-control" id="nid"
                                                            name="username" placeholder="Enter Your NID"/>
                                                 </div>
+
+                                                <div className="form-group mb-2">
+                                                    <label className="form-label" htmlFor="username">Name</label>
+                                                    <input type="text" className="form-control" id="nid"
+                                                           name="username" placeholder="Enter Your Name"/>
+                                                </div>
+
+                                                <div className="form-group mb-2">
+                                                    <label className="form-label" htmlFor="username">Email</label>
+                                                    <input type="text" className="form-control" id="nid"
+                                                           name="username" placeholder="Enter Your Email"/>
+                                                </div>
+
                                                 {/*end form-group*/}
                                                 <div className="form-group">
                                                     <label className="form-label"
@@ -50,6 +58,15 @@ const Login = () => {
                                                     <input type="password" className="form-control" name="password"
                                                            id="userpassword" placeholder="Enter password"/>
                                                 </div>
+
+                                                <div className="form-group">
+                                                    <label className="form-label"
+                                                           htmlFor="userpassword">Confirm Password</label>
+                                                    <input type="password" className="form-control" name="password"
+                                                           id="userpassword" placeholder="Enter Confirm password"/>
+                                                </div>
+
+                                                
                                                 {/*end form-group*/}
                                                 <div className="form-group row mt-3">
                                                     <div className="col-sm-6">
@@ -71,7 +88,7 @@ const Login = () => {
                                                 <div className="form-group mb-0 row">
                                                     <div className="col-12">
                                                         <div className="d-grid mt-3">
-                                                            <button onClick={handleLogIn} className="btn btn-primary"
+                                                            <button onClick={handRegistration} className="btn btn-primary"
                                                                     type="button">Log In <i
                                                                 className="fas fa-sign-in-alt ms-1"/></button>
                                                         </div>
@@ -82,7 +99,7 @@ const Login = () => {
                                             </form>
                                             {/*end form*/}
                                             <div className="m-3 text-center text-muted">
-                                                <p className="mb-0">Don't have an account ? <a onClick={handleRegister} href="#"
+                                                <p className="mb-0">Don't have an account ? <a href="auth-register.html"
                                                                                                className="text-primary ms-2">Free
                                                     Resister</a></p>
                                             </div>
@@ -91,16 +108,13 @@ const Login = () => {
                                                 <h6 className="card-bg px-3 my-4 d-inline-block">Or Login With</h6>
                                             </div>
                                             {/* <div className="d-flex justify-content-center mb-1">
-                                                <a href="#"
-                                                   className="d-flex justify-content-center align-items-center thumb-sm bg-soft-primary rounded-circle me-2">
+                                                <a href="#" className="d-flex justify-content-center align-items-center thumb-sm bg-soft-primary rounded-circle me-2">
                                                     <i className="fab fa-facebook align-self-center"/>
                                                 </a>
-                                                <a href="#"
-                                                   className="d-flex justify-content-center align-items-center thumb-sm bg-soft-info rounded-circle me-2">
+                                                <a href="#" className="d-flex justify-content-center align-items-center thumb-sm bg-soft-info rounded-circle me-2">
                                                     <i className="fab fa-twitter align-self-center"/>
                                                 </a>
-                                                <a href="#"
-                                                   className="d-flex justify-content-center align-items-center thumb-sm bg-soft-danger rounded-circle">
+                                                <a href="#" className="d-flex justify-content-center align-items-center thumb-sm bg-soft-danger rounded-circle">
                                                     <i className="fab fa-google align-self-center"/>
                                                 </a>
                                             </div> */}
@@ -119,9 +133,9 @@ const Login = () => {
                 </div>
                 {/*end row*/}
             </div>
-
         </>
     );
-};
 
-export default Login;
+}
+
+export default Register;

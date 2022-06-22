@@ -8,7 +8,7 @@ import Login from "./pages/Auth/Login";
 import DocumentsList from "./pages/Domain/Documents/DocumentsList";
 import AddDocument from "./pages/Domain/Documents/AddDocument";
 import Category from "./pages/Domain/Category/Category";
-
+import Register from "./pages/Auth/Register";
 
 const Dashboard = () => {
 
@@ -30,6 +30,7 @@ const Dashboard = () => {
                                         <Route path="/add-documents" element={<AddDocument/>}/>
                                         <Route path="/documents" element={<DocumentsList/>}/>
                                         <Route path="/" element={<Login/>}/>
+                                        <Route path="/register" element={<Register/>}/>
                                     </Routes>
                                 </div>
                                 <RightBar/>
