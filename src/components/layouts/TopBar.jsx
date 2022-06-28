@@ -1,4 +1,6 @@
 import {useNavigate} from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TopBar = () => {
 
@@ -13,6 +15,7 @@ const TopBar = () => {
         <>
             <div className="topbar">
                 {/* Navbar */}
+                <ToastContainer />
                 <nav className="navbar-custom" id="navbar-custom">
                     <ul className="list-unstyled topbar-nav float-end mb-0">
                         

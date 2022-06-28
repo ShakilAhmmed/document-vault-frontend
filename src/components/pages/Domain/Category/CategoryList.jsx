@@ -1,4 +1,6 @@
-const CategoryList = () => {
+const CategoryList = (props) => {
+    const {categories , deleteCategory} = props;
+
     return (
         <>
             <div className="card">
@@ -17,94 +19,25 @@ const CategoryList = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>4</td>
-                                <td>$250</td>
-                                <td className="text-end">
-                                    <div className="dropdown d-inline-block">
-                                        <a className="dropdown-toggle arrow-none" id="dLabel11"
-                                           data-bs-toggle="dropdown" href="#" role="button"
-                                           aria-haspopup="false" aria-expanded="false">
-                                            <i className="las la-ellipsis-v font-20 text-muted"></i>
-                                        </a>
-                                        <div className="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dLabel11">
-                                            <a className="dropdown-item" href="#">Creat Project</a>
-                                            <a className="dropdown-item" href="#">Open Project</a>
-                                            <a className="dropdown-item" href="#">Tasks Details</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>4</td>
-                                <td>$250</td>
-                                <td className="text-end">
-                                    <div className="dropdown d-inline-block">
-                                        <a className="dropdown-toggle arrow-none" id="dLabel11"
-                                           data-bs-toggle="dropdown" href="#" role="button"
-                                           aria-haspopup="false" aria-expanded="false">
-                                            <i className="las la-ellipsis-v font-20 text-muted"></i>
-                                        </a>
-                                        <div className="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dLabel11">
-                                            <a className="dropdown-item" href="#">Creat Project</a>
-                                            <a className="dropdown-item" href="#">Open Project</a>
-                                            <a className="dropdown-item" href="#">Tasks Details</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>4</td>
-                                <td>$250</td>
-                                <td className="text-end">
-                                    <div className="dropdown d-inline-block">
-                                        <a className="dropdown-toggle arrow-none" id="dLabel11"
-                                           data-bs-toggle="dropdown" href="#" role="button"
-                                           aria-haspopup="false" aria-expanded="false">
-                                            <i className="las la-ellipsis-v font-20 text-muted"></i>
-                                        </a>
-                                        <div className="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dLabel11">
-                                            <a className="dropdown-item" href="#">Creat Project</a>
-                                            <a className="dropdown-item" href="#">Open Project</a>
-                                            <a className="dropdown-item" href="#">Tasks Details</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>4</td>
-                                <td>$250</td>
-                                <td className="text-end">
-                                    <div className="dropdown d-inline-block">
-                                        <a className="dropdown-toggle arrow-none" id="dLabel11"
-                                           data-bs-toggle="dropdown" href="#" role="button"
-                                           aria-haspopup="false" aria-expanded="false">
-                                            <i className="las la-ellipsis-v font-20 text-muted"></i>
-                                        </a>
-                                        <div className="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dLabel11">
-                                            <a className="dropdown-item" href="#">Creat Project</a>
-                                            <a className="dropdown-item" href="#">Open Project</a>
-                                            <a className="dropdown-item" href="#">Tasks Details</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                            {categories && categories.map((category,index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td> { index + 1 } </td>
+                                        <td>{ category.title }</td>
+                                        <td>{ category.status === 1 ? 'Active' : 'Inactive' }</td>
+                                        <td className="text-end">
+                                            <button className="btn btn-de-dashed-info">
+                                                <i className="fa fa-edit"></i>
+                                            </button>
+
+                                            <button onClick={() => deleteCategory(category.id)} className="btn btn-de-dashed-danger">
+                                                <i className="fa fa-times"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                             </tbody>
                         </table>
                     </div>

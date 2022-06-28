@@ -1,28 +1,6 @@
-import {useFormik} from "formik";
-import * as Yup from 'yup';
-import axios from "axios";
+const CategoryForm = (props) => {
 
-const CategoryForm = () => {
-
-    const categoryForm = useFormik({
-        initialValues: {
-            name: '',
-            status: ''
-        },
-        validationSchema: Yup.object({
-            name: Yup.string().required('Name Is Required'),
-            status: Yup.string().required('Status Is Required'),
-        }),
-        onSubmit: values => {
-            axios.post('')
-                .then(({response}) => {
-
-                })
-                .catch(({error}) => {
-                    // categoryForm.setErrors();
-                })
-        }
-    });
+    const {categoryForm} = props;
 
 
     return (
@@ -37,17 +15,17 @@ const CategoryForm = () => {
                             <label htmlFor="name" className="form-label">Category</label>
                             <input type="text"
                                    className="form-control"
-                                   id="name"
-                                   name="name"
+                                   id="title"
+                                   name="title"
                                    onChange={categoryForm.handleChange}
                                    onBlur={categoryForm.handleBlur}
-                                   value={categoryForm.values.name}
+                                   value={categoryForm.values.title}
                                    required/>
                             <div className="text-danger">
                                 {
-                                    categoryForm.touched.name &&
-                                    categoryForm.errors.name &&
-                                    (<div>{categoryForm.errors.name}</div>)
+                                    categoryForm.touched.title &&
+                                    categoryForm.errors.title &&
+                                    (<div>{categoryForm.errors.title}</div>)
                                 }
                             </div>
                         </div>
