@@ -1,12 +1,40 @@
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import * as Yup from "yup";
+import {API} from "../../../constants/app";
+import {useFormik} from "formik";
+import {toast} from "react-toastify";
 
 
 const Login = () => {
+
+    const loginForm = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: Yup.object({
+            email: Yup.string().email().required('Email Is Required'),
+            password: Yup.string().required('Password Is Required'),
+        }),
+        onSubmit: (values, {resetForm}) => {
+            axios.post(`${API}/auth/login`, values)
+                .then((response) => {
+                    console.log(response);
+                    toast.success("Login Successfully");
+                    resetForm({values: ''});
+                })
+                .catch(() => {
+                    //
+                })
+        }
+    });
 
     let navigate = useNavigate();
 
 
     const handleLogIn = () => {
+        loginForm.handleSubmit();
         navigate('/home', {replace: true})
     }
 
@@ -25,7 +53,7 @@ const Login = () => {
                                     <div className="card">
                                         <div className="card-body p-0 auth-header-box">
                                             <div className="text-center p-3">
-                                                <a href="index.html" className="logo logo-admin">
+                                                <a href="/" className="logo logo-admin">
                                                     <img src="assets/images/document.webp" height={50} alt="logo"
                                                          className="auth-logo"/>
                                                 </a>
@@ -39,16 +67,36 @@ const Login = () => {
                                             <form className="my-4"
                                                   action="https://mannatthemes.com/metrica/default/index.html">
                                                 <div className="form-group mb-2">
-                                                    <label className="form-label" htmlFor="username">NID</label>
-                                                    <input type="text" className="form-control" id="nid"
-                                                           name="username" placeholder="Enter Your NID"/>
+                                                    <label className="form-label" htmlFor="email">Email</label>
+                                                    <input type="email" className="form-control" id="email"
+                                                           onChange={loginForm.handleChange}
+                                                           onBlur={loginForm.handleBlur}
+                                                           value={loginForm.values.email}
+                                                           name="email" placeholder="Enter Your Email"/>
+                                                    <div className="text-danger">
+                                                        {
+                                                            loginForm.touched.email &&
+                                                            loginForm.errors.email &&
+                                                            (<div>{loginForm.errors.email}</div>)
+                                                        }
+                                                    </div>
                                                 </div>
                                                 {/*end form-group*/}
                                                 <div className="form-group">
                                                     <label className="form-label"
-                                                           htmlFor="userpassword">Password</label>
+                                                           htmlFor="password">Password</label>
                                                     <input type="password" className="form-control" name="password"
-                                                           id="userpassword" placeholder="Enter password"/>
+                                                           onChange={loginForm.handleChange}
+                                                           onBlur={loginForm.handleBlur}
+                                                           value={loginForm.values.password}
+                                                           id="password" placeholder="Enter password"/>
+                                                    <div className="text-danger">
+                                                        {
+                                                            loginForm.touched.password &&
+                                                            loginForm.errors.password &&
+                                                            (<div>{loginForm.errors.password}</div>)
+                                                        }
+                                                    </div>
                                                 </div>
                                                 {/*end form-group*/}
                                                 <div className="form-group row mt-3">
@@ -82,7 +130,8 @@ const Login = () => {
                                             </form>
                                             {/*end form*/}
                                             <div className="m-3 text-center text-muted">
-                                                <p className="mb-0">Don't have an account ? <a onClick={handleRegister} href="#"
+                                                <p className="mb-0">Don't have an account ? <a onClick={handleRegister}
+                                                                                               href="#"
                                                                                                className="text-primary ms-2">Free
                                                     Resister</a></p>
                                             </div>
@@ -90,20 +139,6 @@ const Login = () => {
                                             <div className="text-center mt-n5">
                                                 <h6 className="card-bg px-3 my-4 d-inline-block">Or Login With</h6>
                                             </div>
-                                            {/* <div className="d-flex justify-content-center mb-1">
-                                                <a href="#"
-                                                   className="d-flex justify-content-center align-items-center thumb-sm bg-soft-primary rounded-circle me-2">
-                                                    <i className="fab fa-facebook align-self-center"/>
-                                                </a>
-                                                <a href="#"
-                                                   className="d-flex justify-content-center align-items-center thumb-sm bg-soft-info rounded-circle me-2">
-                                                    <i className="fab fa-twitter align-self-center"/>
-                                                </a>
-                                                <a href="#"
-                                                   className="d-flex justify-content-center align-items-center thumb-sm bg-soft-danger rounded-circle">
-                                                    <i className="fab fa-google align-self-center"/>
-                                                </a>
-                                            </div> */}
                                         </div>
                                         {/*end card-body*/}
                                     </div>
