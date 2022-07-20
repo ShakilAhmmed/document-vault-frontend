@@ -4,9 +4,14 @@ import * as Yup from "yup";
 import {API} from "../../../constants/app";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
-
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../../../slices/authSlice";
+import {useEffect} from "react";
 
 const Login = () => {
+    const dispatch = useDispatch();
+    let navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
     const loginForm = useFormik({
         initialValues: {
@@ -20,18 +25,17 @@ const Login = () => {
         onSubmit: (values, {resetForm}) => {
             axios.post(`${API}/auth/login`, values)
                 .then((response) => {
-                    console.log(response);
+                    if (response.status === 201) {
+                        dispatch(login(response.data));
+                    }
                     toast.success("Login Successfully");
                     resetForm({values: ''});
                 })
-                .catch(() => {
-                    //
+                .catch((err) => {
+                    console.log(err);
                 })
         }
     });
-
-    let navigate = useNavigate();
-
 
     const handleLogIn = () => {
         loginForm.handleSubmit();
@@ -41,6 +45,12 @@ const Login = () => {
     const handleRegister = () => {
         navigate('/register', {replace: true})
     }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/home', {replace: true});
+        }
+    }, [isLoggedIn, navigate]);
 
     return (
         <>
@@ -110,7 +120,8 @@ const Login = () => {
                                                     </div>
                                                     {/*end col*/}
                                                     <div className="col-sm-6 text-end">
-                                                        <a href="auth-recover-pw.html" className="text-muted font-13"><i
+                                                        <a href="auth-recover-pw.html"
+                                                           className="text-muted font-13"><i
                                                             className="dripicons-lock"/> Forgot password?</a>
                                                     </div>
                                                     {/*end col*/}
@@ -119,7 +130,8 @@ const Login = () => {
                                                 <div className="form-group mb-0 row">
                                                     <div className="col-12">
                                                         <div className="d-grid mt-3">
-                                                            <button onClick={handleLogIn} className="btn btn-primary"
+                                                            <button onClick={handleLogIn}
+                                                                    className="btn btn-primary"
                                                                     type="button">Log In <i
                                                                 className="fas fa-sign-in-alt ms-1"/></button>
                                                         </div>
@@ -130,9 +142,10 @@ const Login = () => {
                                             </form>
                                             {/*end form*/}
                                             <div className="m-3 text-center text-muted">
-                                                <p className="mb-0">Don't have an account ? <a onClick={handleRegister}
-                                                                                               href="#"
-                                                                                               className="text-primary ms-2">Free
+                                                <p className="mb-0">Don't have an account ? <a
+                                                    onClick={handleRegister}
+                                                    href="#"
+                                                    className="text-primary ms-2">Free
                                                     Resister</a></p>
                                             </div>
                                             <hr className="hr-dashed mt-4"/>

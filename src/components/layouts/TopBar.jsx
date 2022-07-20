@@ -1,12 +1,15 @@
 import {useNavigate} from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useDispatch} from "react-redux";
+import {logout} from "../../slices/authSlice";
 
 const TopBar = () => {
-
+    const dispatch = useDispatch();
     let navigate = useNavigate();
 
     const handleLogout = () => {
+        dispatch(logout());
         navigate('/', {replace: true})
     }
 
@@ -15,10 +18,10 @@ const TopBar = () => {
         <>
             <div className="topbar">
                 {/* Navbar */}
-                <ToastContainer />
+                <ToastContainer/>
                 <nav className="navbar-custom" id="navbar-custom">
                     <ul className="list-unstyled topbar-nav float-end mb-0">
-                        
+
                         <li className="dropdown notification-list">
                             <a className="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown"
                                href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -140,7 +143,7 @@ const TopBar = () => {
                                     className="ti ti-power font-16 me-1 align-text-bottom"/> Logout</a>
                             </div>
                         </li>
-                        
+
                     </ul>
                     {/*end topbar-nav*/}
                     <ul className="list-unstyled topbar-nav mb-0">
