@@ -13,6 +13,8 @@ const CategoryList = (props) => {
                             <thead>
                             <tr>
                                 <th>Sl No</th>
+                                <th>User Email</th>
+                                <th>User NID</th>
                                 <th>Category</th>
                                 <th>Status</th>
                                 <th className="text-end">Action</th>
@@ -23,6 +25,8 @@ const CategoryList = (props) => {
                                 return (
                                     <tr key={index}>
                                         <td> { index + 1 } </td>
+                                        <td> { category.user.email } </td>
+                                        <td> { category.user.national_id } </td>
                                         <td>{ category.title }</td>
                                         <td>{ category.status === 1 ? 'Active' : 'Inactive' }</td>
                                         <td className="text-end">

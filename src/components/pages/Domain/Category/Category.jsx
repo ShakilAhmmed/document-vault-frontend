@@ -5,8 +5,9 @@ import {API} from "../../../../constants/app";
 import {useEffect, useState} from "react";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import { ToastContainer,toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import http from "../../../../interceptors/http";
 
 const Category = () => {
 
@@ -21,7 +22,8 @@ const Category = () => {
             status: Yup.string().required('Status Is Required'),
         }),
         onSubmit: (values, {resetForm}) => {
-            axios.post(`${API}/categories`, values)
+
+            http.post(`/categories`, values)
                 .then(() => {
                     toast.success("Category Added Successfully");
                     resetForm({values: ''});
@@ -30,7 +32,7 @@ const Category = () => {
                 })
                 .catch(({error}) => {
                     // categoryForm.setErrors();
-                })
+                });
         }
     });
 
@@ -38,22 +40,22 @@ const Category = () => {
 
     const getCategories = async () => {
         try {
-            const {data: data} = await axios.get(`${API}/categories`);
-            setCategories(data.data)
+            const {data: data} = await http.get(`/categories`);
+            setCategories(data.data);
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-    }
+    };
 
     const deleteCategory = async (id) => {
         try {
-            await axios.delete(`${API}/categories/${id}`);
+            await http.delete(`/categories/${id}`);
             toast.success("Category Deleted Successfully");
             return getCategories();
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-    }
+    };
 
     useEffect(() => {
         getCategories();
@@ -64,7 +66,7 @@ const Category = () => {
         <>
 
             <div className="row mt-5">
-                <ToastContainer />
+                <ToastContainer/>
                 <div className="col-lg-4">
                     <CategoryForm categoryForm={categoryForm}/>
                 </div>

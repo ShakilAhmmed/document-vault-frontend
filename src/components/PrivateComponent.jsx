@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
-const PrivateComponent = ({child}) => {
+const PrivateComponent = ({children}) => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const navigate = useNavigate();
 
@@ -11,9 +11,8 @@ const PrivateComponent = ({child}) => {
             navigate('/', {replace: true});
         }
     }, []);
-
-
-    return child;
+    
+    return children;
 }
 
 export default PrivateComponent;

@@ -1,6 +1,8 @@
 import {FilePlus} from "react-feather";
 import {useFormik} from "formik";
 import * as Yup from "yup"
+import http from "../../../../interceptors/http";
+import {toast} from "react-toastify";
 
 const AddDocument = () => {
 
@@ -16,13 +18,25 @@ const AddDocument = () => {
         validationSchema: Yup.object({
             title: Yup.string().required('Title Is Required'),
             category_id: Yup.string().required('Category Is Required'),
-            file: Yup.string().required('File Is Required'),
+            file: Yup.mixed().required('File Is Required'),
             file_type: Yup.string().required('Type Is Required'),
             upload_date: Yup.string().required('Date Is Required'),
             status: Yup.string().required('Status Is Required'),
         }),
-        onSubmit: values => {
-            console.log(values)
+        onSubmit: (values, {resetForm}) => {
+
+            http.post(`/documents`, values, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then(() => {
+                    toast.success("Document Added Successfully");
+                    resetForm({values: ''});
+                })
+                .catch(({error}) => {
+                    // categoryForm.setErrors();
+                });
         }
     });
 

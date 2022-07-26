@@ -1,12 +1,43 @@
 import {useNavigate} from "react-router-dom";
+import {useFormik} from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import {API} from "../../../constants/app";
+import {toast} from "react-toastify";
 
 const Register = () => {
 
     let navigate = useNavigate();
 
-    const handRegistration = () => {
-        navigate('/', {replace: true})
-    }
+    const regForm = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            password: '',
+            national_id: '',
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Name Is Required'),
+            email: Yup.string().email().required('Email Is Required'),
+            national_id: Yup.string().required('National Id Is Required'),
+            password: Yup.string().required('Password Is Required'),
+        }),
+        onSubmit: (values, {resetForm}) => {
+            axios.post(`${API}/users`, values)
+                .then((response) => {
+                    toast.success("Registration Successfully.");
+                    resetForm({values: ''});
+                    navigate('/', {replace: true});
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    });
+
+    const loginRedirect = () => {
+        navigate('/', {replace: true});
+    };
 
 
     return (
@@ -32,31 +63,79 @@ const Register = () => {
                                         </div>
                                         <div className="card-body pt-0">
                                             <form className="my-4"
-                                                  action="https://mannatthemes.com/metrica/default/index.html">
+                                                  onSubmit={regForm.handleSubmit}>
                                                 <div className="form-group mb-2">
-                                                    <label className="form-label" htmlFor="username">NID</label>
-                                                    <input type="text" className="form-control" id="nid"
-                                                           name="username" placeholder="Enter Your NID"/>
+                                                    <label className="form-label" htmlFor="national_id">NID</label>
+                                                    <input type="text" className="form-control" id="national_id"
+                                                           onChange={regForm.handleChange}
+                                                           onBlur={regForm.handleBlur}
+                                                           value={regForm.values.national_id}
+                                                           name="national_id" placeholder="Enter Your NID"/>
+
+                                                    <div className="text-danger">
+                                                        {
+                                                            regForm.touched.national_id &&
+                                                            regForm.errors.national_id &&
+                                                            (<div>{regForm.errors.national_id}</div>)
+                                                        }
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="form-group mb-2">
-                                                    <label className="form-label" htmlFor="username">Name</label>
-                                                    <input type="text" className="form-control" id="nid"
-                                                           name="username" placeholder="Enter Your Name"/>
+                                                    <label className="form-label" htmlFor="name">Name</label>
+                                                    <input type="text" className="form-control" id="name"
+                                                           onChange={regForm.handleChange}
+                                                           onBlur={regForm.handleBlur}
+                                                           value={regForm.values.name}
+                                                           name="name" placeholder="Enter Your Name"/>
+
+                                                    <div className="text-danger">
+                                                        {
+                                                            regForm.touched.name &&
+                                                            regForm.errors.name &&
+                                                            (<div>{regForm.errors.name}</div>)
+                                                        }
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="form-group mb-2">
-                                                    <label className="form-label" htmlFor="username">Email</label>
-                                                    <input type="text" className="form-control" id="nid"
-                                                           name="username" placeholder="Enter Your Email"/>
+                                                    <label className="form-label" htmlFor="email">Email</label>
+                                                    <input type="text" className="form-control" id="email"
+                                                           onChange={regForm.handleChange}
+                                                           onBlur={regForm.handleBlur}
+                                                           value={regForm.values.email}
+                                                           name="email" placeholder="Enter Your Email"/>
+
+                                                    <div className="text-danger">
+                                                        {
+                                                            regForm.touched.email &&
+                                                            regForm.errors.email &&
+                                                            (<div>{regForm.errors.email}</div>)
+                                                        }
+                                                    </div>
+
                                                 </div>
 
                                                 {/*end form-group*/}
                                                 <div className="form-group">
                                                     <label className="form-label"
-                                                           htmlFor="userpassword">Password</label>
+                                                           htmlFor="password">Password</label>
                                                     <input type="password" className="form-control" name="password"
-                                                           id="userpassword" placeholder="Enter password"/>
+                                                           onChange={regForm.handleChange}
+                                                           onBlur={regForm.handleBlur}
+                                                           value={regForm.values.password}
+                                                           id="password" placeholder="Enter password"/>
+
+                                                    <div className="text-danger">
+                                                        {
+                                                            regForm.touched.password &&
+                                                            regForm.errors.password &&
+                                                            (<div>{regForm.errors.password}</div>)
+                                                        }
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="form-group">
@@ -66,7 +145,7 @@ const Register = () => {
                                                            id="userpassword" placeholder="Enter Confirm password"/>
                                                 </div>
 
-                                                
+
                                                 {/*end form-group*/}
                                                 <div className="form-group row mt-3">
                                                     <div className="col-sm-6">
@@ -88,8 +167,9 @@ const Register = () => {
                                                 <div className="form-group mb-0 row">
                                                     <div className="col-12">
                                                         <div className="d-grid mt-3">
-                                                            <button onClick={handRegistration} className="btn btn-primary"
-                                                                    type="button">Log In <i
+                                                            <button
+                                                                className="btn btn-primary"
+                                                                ttype="submit">Register <i
                                                                 className="fas fa-sign-in-alt ms-1"/></button>
                                                         </div>
                                                     </div>
@@ -98,15 +178,23 @@ const Register = () => {
                                                 {/*end form-group*/}
                                             </form>
                                             {/*end form*/}
-                                            <div className="m-3 text-center text-muted">
-                                                <p className="mb-0">Don't have an account ? <a href="auth-register.html"
-                                                                                               className="text-primary ms-2">Free
-                                                    Resister</a></p>
-                                            </div>
                                             <hr className="hr-dashed mt-4"/>
                                             <div className="text-center mt-n5">
-                                                <h6 className="card-bg px-3 my-4 d-inline-block">Or Login With</h6>
+                                                <h6 className="card-bg px-3 my-4 d-inline-block">Or Login</h6>
                                             </div>
+
+
+                                            <div className="form-group mb-0 row">
+                                                <div className="col-12">
+                                                    <div className="d-grid mt-3">
+                                                        <button onClick={loginRedirect} className="btn btn-success"
+                                                                type="button">Login <i
+                                                            className="fas fa-sign-in-alt ms-1"/></button>
+                                                    </div>
+                                                </div>
+                                                {/*end col*/}
+                                            </div>
+
                                             {/* <div className="d-flex justify-content-center mb-1">
                                                 <a href="#" className="d-flex justify-content-center align-items-center thumb-sm bg-soft-primary rounded-circle me-2">
                                                     <i className="fab fa-facebook align-self-center"/>
