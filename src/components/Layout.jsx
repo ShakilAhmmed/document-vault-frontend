@@ -8,6 +8,7 @@ import PrivateComponent from "./PrivateComponent";
 import DocumentsList from "./pages/Domain/Documents/DocumentsList";
 import AddDocument from "./pages/Domain/Documents/AddDocument";
 import Category from "./pages/Domain/Category/Category";
+import SharedDocumentList from "./pages/Domain/Documents/SharedDocumentList";
 
 const Layout = () => {
     return (
@@ -19,7 +20,7 @@ const Layout = () => {
                     <div className="page-content-tab">
                         <div className="container-fluid">
                             <Routes>
-                                <Route path="/home"  element={
+                                <Route path="/home" element={
                                     <PrivateComponent>
                                         <Home/>
                                     </PrivateComponent>
@@ -27,7 +28,7 @@ const Layout = () => {
                                 <Route path="/categories" element={<Category/>}/>
                                 <Route path="/add-documents" element={<AddDocument/>}/>
                                 <Route path="/documents" element={<DocumentsList/>}/>
-                                <Route path="/documents" element={<DocumentsList/>}/>
+                                <Route path="/shared" element={<SharedDocumentList/>}/>
                             </Routes>
                         </div>
                         <RightBar/>
