@@ -1,11 +1,13 @@
-import {Download, Folder} from "react-feather";
+import {UserPlus, Folder} from "react-feather";
 import {useEffect, useState} from "react";
 import http from "../../../../interceptors/http";
 import moment from 'moment';
+import DocumentShareModal from "./DocumentShareModal";
 
 const DocumentsList = () => {
 
     const [documents, setDocuments] = useState([]);
+    const [documentId, setDocumentId] = useState('')
 
     const getDocuments = async () => {
         try {
@@ -24,7 +26,7 @@ const DocumentsList = () => {
             console.log(e);
         }
     };
-    //
+
     useEffect(() => {
         getDocuments();
     }, []);
@@ -40,8 +42,13 @@ const DocumentsList = () => {
                                     <div className="col-sm-4 text-center" key={index}>
                                         <div className="card">
                                             <Folder height={30} style={{marginLeft: '165px'}}/>
-                                            <Download onClick={() => handleDownload(document.id)} height={30}
-                                                      style={{marginLeft: '335px', marginTop: '-33px'}}/>
+                                            {/*<Download onClick={() => handleDownload(document.id)} height={30}*/}
+                                            {/*          style={{marginLeft: '335px', marginTop: '-33px'}}/>*/}
+                                            <UserPlus height={30}
+                                                      onClick={() => setDocumentId(document.id)}
+                                                      style={{marginLeft: '335px', marginTop: '-33px', cursor:'pointer'}}
+                                                      data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            />
                                             <br/>
                                             <span>Title : {document.title}</span>
                                             <span>Category : {document.category.title}</span>
@@ -55,6 +62,7 @@ const DocumentsList = () => {
 
                     </div>
                 </div>
+                <DocumentShareModal document={documentId}/>
             </div>
         </>
     );

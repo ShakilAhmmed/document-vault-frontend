@@ -22,6 +22,10 @@ const Main = () => {
                             <Link className="nav-link" to="/documents">My Documents</Link>
                         </li>
 
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/shared">Shared Documents</Link>
+                        </li>
+
                     </ul>
                 </div>
             </div>
